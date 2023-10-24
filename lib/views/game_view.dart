@@ -15,17 +15,49 @@ class GameView extends StatelessWidget {
             title: Text("Hangman"),
           ),
           body: Column(children: [
+            Image.asset("images/${controller.hibakSzama()}.png"),
             Text(controller.randomSzoveg),
             Text(controller.csillagosSzoveg),
-            CupertinoButton(
-              child: Text("generalj masikat"),
-              onPressed: () {
-                controller.randomSzovegGeneralasa();
-              },
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    LetterButton(letter: "A", controller: controller),
+                    LetterButton(letter: "Á",controller: controller),
+                    LetterButton(letter: "B",controller: controller),
+                    LetterButton(letter: "C",controller: controller),
+                    LetterButton(letter: "D",controller: controller),
+                    LetterButton(letter: "E",controller: controller),
+                  ],
+                )
+              ],
             )
           ]),
         );
       },
+    );
+  }
+}
+
+class LetterButton extends StatelessWidget {
+  const LetterButton({
+  required this.letter,
+    required this.controller,
+  });
+
+  final GameViewController controller;
+  final  String letter;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoButton.filled(
+      padding: EdgeInsets.zero,
+      child: Text(letter),
+       onPressed: (controller.aMegadottBetuVoltMar(letter)) 
+       ? null 
+       : ()=>controller.tippHozzaadasa(letter),
+              
     );
   }
 }
